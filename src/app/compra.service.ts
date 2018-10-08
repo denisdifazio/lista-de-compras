@@ -1,49 +1,40 @@
 import { Injectable } from "@angular/core";
 import { Compra } from "./compra";
+import { ApiService } from "./api.service";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class CompraService {
-  ultimoId: number = 0;
-  compras: Compra[] = [];
+  private api: ApiService;
 
-  constructor() {}
-
-  addCompra(compra: Compra): CompraService {
-    if (!compra.id) {
-      compra.id = ++this.ultimoId;
-    }
-    this.compras.push(compra);
-    return this;
+  constructor(api: ApiService) {
+    this.api = api;
   }
 
-  deleteCompraPorId(id: number): CompraService {
-    this.compras = this.compras.filter(todo => todo.id !== id);
-    return this;
+  addCompra(compra: Compra): Observable<Compra> {
+    return this.api.createCompra(compra);
   }
 
-  updateCompraPorId(id: number, valores: Object = {}): Compra {
-    let compra = this.getCompraPorId(id);
-    if (!compra) {
-      return null;
-    }
-    Object.assign(compra, valores);
-    return compra;
+  deleteCompraPorId(id: number): Observable<{}> {
+    return this.api.deleteCompraPorId(id);
   }
 
-  getTodasCompras(): Compra[] {
-    return this.compras;
+  updateCompra(compra: Compra): Observable<Compra> {
+    return this.api.updateCompra(compra);
   }
 
-  getCompraPorId(id: number): Compra {
-    return this.compras.filter(todo => todo.id === id).pop();
+  getTodasCompras(): Observable<Compra[]> {
+    return this.api.getTodasCompras();
   }
 
-  toggleCompraCompletada(compra: Compra) {
-    let novaCompra = this.updateCompraPorId(compra.id, {
-      completada: !compra.completada
-    });
-    return novaCompra;
+  getCompraPorId(id: number): Observable<Compra> {
+    return this.api.getCompraPorId(id);
+  }
+
+  toggleCompraCompletada(compra: Compra): Observable<Compra> {
+    compra.completada = !compra.completada;
+    return this.api.updateCompra(compra);
   }
 }
