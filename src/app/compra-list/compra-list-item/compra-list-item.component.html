@@ -1,0 +1,5 @@
+<div class="view">
+  <input class="toggle" type="checkbox" (click)="toggleCompraCompletada(compra)" [checked]="compra.completada">
+  <label>{{compra.texto}}</label>
+  <button class="destroy" (click)="removeCompra(compra)"></button>
+</div>

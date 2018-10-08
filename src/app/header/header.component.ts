@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter } from "@angular/core";
+import { Compra } from "../compra";
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  selector: "app-header",
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.css"]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
+  compra: Compra = new Compra();
 
-  constructor() { }
+  @Output()
+  add: EventEmitter<Compra> = new EventEmitter();
 
-  ngOnInit() {
+  constructor() {}
+
+  addCompra() {
+    this.add.emit(this.compra);
+    this.compra = new Compra();
   }
-
 }
