@@ -17,7 +17,7 @@ export class CompraService {
     return this.api.createCompra(compra);
   }
 
-  deleteCompraPorId(id: number): Observable<{}> {
+  deleteCompraPorId(id: string): Observable<{}> {
     return this.api.deleteCompraPorId(id);
   }
 
@@ -27,10 +27,6 @@ export class CompraService {
 
   getTodasCompras(): Observable<Compra[]> {
     return this.api.getTodasCompras();
-  }
-
-  getCompraPorId(id: number): Observable<Compra> {
-    return this.api.getCompraPorId(id);
   }
 
   toggleCompraCompletada(compra: Compra): Observable<Compra> {

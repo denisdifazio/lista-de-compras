@@ -22,7 +22,6 @@ export class ComprasComponent implements OnInit {
 
   ngOnInit() {
     this.compraService.getTodasCompras().subscribe(compras => {
-      console.log(compras);
       this.compras = compras;
     });
   }

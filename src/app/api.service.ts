@@ -1,54 +1,55 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../environments/environment";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Compra } from "./compra";
 import { Observable } from "rxjs";
-import { catchError } from "rxjs/operators";
-
-const API_URL = environment.apiUrl;
+import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
 })
 export class ApiService {
-  private http: HttpClient;
+  private comprasAF: AngularFireList<Compra>;
+  private compras: Observable<Compra[]>;
 
-  constructor(http: HttpClient) {
-    this.http = http;
-  }
-
-  private handleError(error: HttpErrorResponse) {
-    console.error("ApiService::handleError", error);
-    return Observable.throw(error);
+  constructor(
+    private db: AngularFireDatabase,
+    private afAuth: AngularFireAuth
+  ) {
+    const userId = this.afAuth.auth.currentUser.uid;
+    if (userId) {
+      this.comprasAF = this.db.list<Compra>(`compras/${userId}`);
+      this.compras = this.comprasAF
+        .snapshotChanges()
+        .pipe(
+          map(changes =>
+            changes.map(c => ({ id: c.payload.key, ...c.payload.val() }))
+          )
+        );
+    }
   }
 
   public getTodasCompras(): Observable<Compra[]> {
-    return this.http
-      .get<Compra[]>(API_URL + "/compras")
-      .pipe(catchError(this.handleError));
+    if (!this.comprasAF) return;
+
+    return this.compras;
   }
 
   public createCompra(compra: Compra): Observable<Compra> {
-    return this.http
-      .post<Compra>(API_URL + "/compras", compra)
-      .pipe(catchError(this.handleError));
-  }
+    if (!this.comprasAF) return;
 
-  public getCompraPorId(compraId: number): Observable<Compra> {
-    return this.http
-      .get<Compra>(API_URL + "/compras/" + compraId)
-      .pipe(catchError(this.handleError));
+    this.comprasAF.push(compra);
   }
 
   public updateCompra(compra: Compra): Observable<Compra> {
-    return this.http
-      .put<Compra>(API_URL + "/compras/" + compra.id, compra)
-      .pipe(catchError(this.handleError));
+    if (!this.comprasAF) return;
+
+    this.comprasAF.update(compra.id, compra);
   }
 
-  public deleteCompraPorId(compraId: number): Observable<{}> {
-    return this.http
-      .delete(API_URL + "/compras/" + compraId)
-      .pipe(catchError(this.handleError));
+  public deleteCompraPorId(compraId: string): Observable<{}> {
+    if (!this.comprasAF) return;
+
+    this.comprasAF.remove(compraId);
   }
 }

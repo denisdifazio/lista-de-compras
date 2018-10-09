@@ -1,5 +1,5 @@
 export class Compra {
-  id: number;
+  id: string;
   texto: string = "";
   completada: boolean = false;
 
