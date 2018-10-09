@@ -1,0 +1,43 @@
+<div class="sign-up-wrapper">
+  <form [formGroup]="frm">
+
+    <h1>Lista de Compras</h1>
+
+    <input type="text" formControlName="username" placeholder="Email">
+
+    <div class="input-errors" *ngIf="(frm.get('username').invalid && frm.get('username').touched) || showInputErrors">
+      <div *ngIf="frm.get('username').hasError('required')">
+        Por favor, insira o seu usuário
+      </div>
+    </div>
+
+    <input type="password" formControlName="password" placeholder="Senha">
+
+    <div class="input-errors" *ngIf="(frm.get('password').invalid && frm.get('password').touched) || showInputErrors">
+      <div *ngIf="frm.get('password').hasError('required')">
+        Por favor, insira sua senha
+      </div>
+    </div>
+
+    <input type="password" compare="password" formControlName="password_confirm" placeholder="Confirmar senha">
+
+    <div class="input-errors" *ngIf="(frm.get('password_confirm').invalid && frm.get('password_confirm').touched) || showInputErrors">
+      <div *ngIf="frm.get('password_confirm').hasError('required')">
+        Por favor, confirme sua senha
+      </div>
+      <div *ngIf="frm.get('password_confirm').hasError('compare')">
+        Senhas precisam ser iguais
+      </div>
+    </div>
+
+    <div class="sign-in-error" *ngIf="hasFailed">
+      Usuário e senha inválidos
+    </div>
+
+    <button (click)="doSignUp()" [disabled]="isBusy">
+      <ng-template [ngIf]="!isBusy">Registrar</ng-template>
+      <ng-template [ngIf]="isBusy">Registrando, por favor espere...</ng-template>
+    </button>
+
+  </form>
+</div>

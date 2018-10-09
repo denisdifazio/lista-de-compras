@@ -21,8 +21,9 @@ export class ComprasComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.data.subscribe(data => {
-      this.compras = data["compras"];
+    this.compraService.getTodasCompras().subscribe(compras => {
+      console.log(compras);
+      this.compras = compras;
     });
   }
 
