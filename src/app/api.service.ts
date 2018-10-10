@@ -35,19 +35,19 @@ export class ApiService {
     return this.compras;
   }
 
-  public createCompra(compra: Compra): Observable<Compra> {
+  public createCompra(compra: Compra) {
     if (!this.comprasAF) return;
 
     this.comprasAF.push(compra);
   }
 
-  public updateCompra(compra: Compra): Observable<Compra> {
+  public updateCompra(compra: Compra) {
     if (!this.comprasAF) return;
 
     this.comprasAF.update(compra.id, compra);
   }
 
-  public deleteCompraPorId(compraId: string): Observable<{}> {
+  public deleteCompraPorId(compraId: string) {
     if (!this.comprasAF) return;
 
     this.comprasAF.remove(compraId);

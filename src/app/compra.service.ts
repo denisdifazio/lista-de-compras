@@ -13,24 +13,25 @@ export class CompraService {
     this.api = api;
   }
 
-  addCompra(compra: Compra): Observable<Compra> {
-    return this.api.createCompra(compra);
+  addCompra(compra: Compra) {
+    this.api.createCompra(compra);
   }
 
-  deleteCompraPorId(id: string): Observable<{}> {
-    return this.api.deleteCompraPorId(id);
+  deleteCompraPorId(id: string) {
+    this.api.deleteCompraPorId(id);
   }
 
-  updateCompra(compra: Compra): Observable<Compra> {
-    return this.api.updateCompra(compra);
+  updateCompra(compra: Compra) {
+    this.api.updateCompra(compra);
   }
 
   getTodasCompras(): Observable<Compra[]> {
     return this.api.getTodasCompras();
   }
 
-  toggleCompraCompletada(compra: Compra): Observable<Compra> {
+  toggleCompraCompletada(compra: Compra) {
     compra.completada = !compra.completada;
-    return this.api.updateCompra(compra);
+
+    this.api.updateCompra(compra);
   }
 }
