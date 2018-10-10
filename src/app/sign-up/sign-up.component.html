@@ -1,43 +1,60 @@
-<div class="sign-up-wrapper">
+<div class="container">
+  <h1 class="mx-auto text-center display-4 pt-3 pb-5">Lista de Compras</h1>
   <form [formGroup]="frm">
-
-    <h1>Lista de Compras</h1>
-
-    <input type="text" formControlName="username" placeholder="Email">
-
-    <div class="input-errors" *ngIf="(frm.get('username').invalid && frm.get('username').touched) || showInputErrors">
-      <div *ngIf="frm.get('username').hasError('required')">
-        Por favor, insira o seu usuário
+    <div class="form-group row">
+      <div class="col-sm-6 mx-auto">
+        <label for="usernameInput">Email</label>
+        <input class="form-control" id="usernameInput" type="text" formControlName="username" placeholder="Email">
+        <div class="input-errors" *ngIf="(frm.get('username').invalid && frm.get('username').touched) || showInputErrors">
+          <div class="px-2" *ngIf="frm.get('username').hasError('required')">
+            <small>Por favor, insira seu email</small>
+          </div>
+        </div>
       </div>
     </div>
 
-    <input type="password" formControlName="password" placeholder="Senha">
-
-    <div class="input-errors" *ngIf="(frm.get('password').invalid && frm.get('password').touched) || showInputErrors">
-      <div *ngIf="frm.get('password').hasError('required')">
-        Por favor, insira sua senha
+    <div class="form-group row">
+      <div class="col-sm-6 mx-auto">
+        <label for="passwordInput">Senha</label>
+        <input class="form-control" id="passwordInput" type="password" formControlName="password" placeholder="Senha">
+        <div class="input-errors" *ngIf="(frm.get('password').invalid && frm.get('password').touched) || showInputErrors">
+          <div class="px-2" *ngIf="frm.get('password').hasError('required')">
+            <small>Por favor, insira sua senha</small>
+          </div>
+        </div>
       </div>
     </div>
 
-    <input type="password" compare="password" formControlName="password_confirm" placeholder="Confirmar senha">
-
-    <div class="input-errors" *ngIf="(frm.get('password_confirm').invalid && frm.get('password_confirm').touched) || showInputErrors">
-      <div *ngIf="frm.get('password_confirm').hasError('required')">
-        Por favor, confirme sua senha
-      </div>
-      <div *ngIf="frm.get('password_confirm').hasError('compare')">
-        Senhas precisam ser iguais
+    <div class="form-group row">
+      <div class="col-sm-6 mx-auto">
+        <input class="form-control" id="passwordConfirmInput" type="password" compare="password" formControlName="password_confirm"
+          placeholder="Confirmar senha">
+        <div class="input-errors" *ngIf="(frm.get('password_confirm').invalid && frm.get('password_confirm').touched) || showInputErrors">
+          <div class="px-2" *ngIf="frm.get('password_confirm').hasError('required')">
+            <small>Por favor, confirme sua senha</small>
+          </div>
+          <div class="p-2" *ngIf="frm.get('password_confirm').hasError('compare')">
+            Senhas precisam ser iguais
+          </div>
+          <div class="p-2" *ngIf="hasFailed">
+            Email ou senha inválidos
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="sign-in-error" *ngIf="hasFailed">
-      Usuário e senha inválidos
+    <div class="row justify-content-center">
+      <div class="col-sm-2 text-center pb-2">
+        <button class="btn btn-primary btn-lg" (click)="doSignUp()" [disabled]="isBusy">
+          Registrar
+        </button>
+      </div>
+
+      <div class="col-sm-2 text-center">
+        <button class="btn btn-outline-secondary btn-lg" (click)="cancelar()">
+          Cancelar
+        </button>
+      </div>
     </div>
-
-    <button (click)="doSignUp()" [disabled]="isBusy">
-      <ng-template [ngIf]="!isBusy">Registrar</ng-template>
-      <ng-template [ngIf]="isBusy">Registrando, por favor espere...</ng-template>
-    </button>
-
   </form>
 </div>

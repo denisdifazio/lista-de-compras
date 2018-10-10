@@ -1,7 +1,8 @@
 <section class="main" *ngIf="compras.length > 0">
-  <ul class="compras-list">
-    <li *ngFor="let compra of compras" [class.completed]="compra.completada">
-      <app-compra-list-item [compra]="compra" (toggleCompletada)="onToggleTodoCompletada($event)" (remove)="onRemoveCompra($event)">
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let compra of compras" [class.completed]="compra.completada">
+      <app-compra-list-item [compra]="compra" (toggleCompletada)="onToggleTodoCompletada($event)" (remove)="onRemoveCompra($event)"
+        (update)="onUpdateCompra($event)">
       </app-compra-list-item>
     </li>
   </ul>

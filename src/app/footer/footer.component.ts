@@ -11,4 +11,8 @@ export class FooterComponent {
   compras: Compra[];
 
   constructor() {}
+
+  getComprasNaoCompletadas() {
+    return this.compras.filter(compra => !compra.completada).length;
+  }
 }

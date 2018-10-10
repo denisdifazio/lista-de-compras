@@ -27,20 +27,18 @@ export class ComprasComponent implements OnInit {
   }
 
   onAddCompra(compra: Compra) {
-    this.compraService.addCompra(compra).subscribe(compra => {
-      this.compras.push(compra);
-    });
+    this.compraService.addCompra(compra);
   }
 
   onRemoveCompra(compra: Compra) {
-    this.compraService.deleteCompraPorId(compra.id).subscribe(_ => {
-      this.compras = this.compras.filter(t => t.id !== compra.id);
-    });
+    this.compraService.deleteCompraPorId(compra.id);
   }
 
   onToggleCompraCompletada(compra: Compra) {
-    this.compraService.toggleCompraCompletada(compra).subscribe(novaCompra => {
-      compra = novaCompra;
-    });
+    this.compraService.toggleCompraCompletada(compra);
+  }
+
+  onUpdateCompra(compra: Compra) {
+    this.compraService.updateCompra(compra);
   }
 }

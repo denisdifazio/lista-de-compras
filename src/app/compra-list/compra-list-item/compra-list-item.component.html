@@ -1,5 +1,29 @@
-<div class="view">
-  <input class="toggle" type="checkbox" (click)="toggleCompraCompletada(compra)" [checked]="compra.completada">
-  <label>{{compra.texto}}</label>
-  <button class="destroy" (click)="removeCompra(compra)"></button>
+<div class="row flex-nowrap">
+  <div class="flex-grow-1 text-truncate">
+    <form class="text-truncate" *ngIf="!editando">
+      <button type="button" class="btn btn-sm" style="background-color: transparent" (click)="toggleCompraCompletada(compra)">
+        <fa-icon *ngIf="compra.completada; else elseBlock" icon="check-circle"></fa-icon>
+        <ng-template #elseBlock>
+          <fa-icon [icon]="['far', 'circle']"></fa-icon>
+        </ng-template>
+      </button>
+      <span class="pl-2" [class.completada]="compra.completada">
+        {{compra.texto}}
+      </span>
+    </form>
+
+    <form class="mr-2" *ngIf="editando" (ngSubmit)="updateCompra(compra)" novalidate>
+      <input class="form-control" [(ngModel)]="compra.texto" (blur)="pararEdicao()" (keyup.escape)="pararEdicao()"
+        autocomplete="off" autoFocus name="compra.texto" type="text">
+    </form>
+  </div>
+
+  <div class="pr-2 d-flex align-self-center flex-nowrap">
+    <button type="button" class="btn btn-primary btn-sm mr-2" (click)="toggleEditar()">
+      <fa-icon icon="pen"></fa-icon>
+    </button>
+    <button *ngIf="!editando" type="button" class="btn btn-outline-dark btn-sm" (click)="removeCompra(compra)">
+      <fa-icon icon="trash"></fa-icon>
+    </button>
+  </div>
 </div>

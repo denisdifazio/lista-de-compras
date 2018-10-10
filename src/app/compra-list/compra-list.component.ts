@@ -14,6 +14,9 @@ export class CompraListComponent {
   remove: EventEmitter<Compra> = new EventEmitter();
 
   @Output()
+  update: EventEmitter<Compra> = new EventEmitter();
+
+  @Output()
   toggleCompletada: EventEmitter<Compra> = new EventEmitter();
 
   constructor() {}
@@ -24,5 +27,9 @@ export class CompraListComponent {
 
   onRemoveCompra(compra: Compra) {
     this.remove.emit(compra);
+  }
+
+  onUpdateCompra(compra: Compra) {
+    this.update.emit(compra);
   }
 }

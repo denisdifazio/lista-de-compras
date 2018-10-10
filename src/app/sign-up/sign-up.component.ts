@@ -51,4 +51,9 @@ export class SignUpComponent implements OnInit {
       this.router.navigate(["compras"]);
     }
   }
+
+  public cancelar() {
+    this.router.navigate(["login"])
+
+  }
 }

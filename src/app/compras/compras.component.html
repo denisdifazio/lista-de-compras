@@ -1,5 +1,12 @@
-<section class="todoapp">
+<div class="container">
+  <div class="row justify-content-end pt-2 pr-2">
+    <a class="btn btn-sm btn-outline-dark" routerLink="/login" routerLinkActive="active">Sair</a>
+  </div>
+
+  <h1 class="mx-auto text-center display-4 pb-5">Lista de Compras</h1>
+
   <app-header (add)="onAddCompra($event)"></app-header>
-  <app-compra-list [compras]="compras" (toggleCompletada)="onToggleCompraCompletada($event)" (remove)="onRemoveCompra($event)"></app-compra-list>
   <app-footer [compras]="compras"></app-footer>
-</section>
+  <app-compra-list [compras]="compras" (toggleCompletada)="onToggleCompraCompletada($event)" (remove)="onRemoveCompra($event)"
+    (update)="onUpdateCompra($event)"></app-compra-list>
+</div>
