@@ -2,16 +2,13 @@ import { Injectable } from "@angular/core";
 import { Compra } from "./compra";
 import { ApiService } from "./api.service";
 import { Observable } from "rxjs";
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class CompraService {
-  private api: ApiService;
-
-  constructor(api: ApiService) {
-    this.api = api;
-  }
+  constructor(private api: ApiService, private auth: AuthService) {}
 
   addCompra(compra: Compra) {
     this.api.createCompra(compra);
@@ -33,5 +30,9 @@ export class CompraService {
     compra.completada = !compra.completada;
 
     this.api.updateCompra(compra);
+  }
+
+  logOut() {
+    this.auth.logOut();
   }
 }

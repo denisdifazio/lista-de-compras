@@ -15,7 +15,9 @@ export class ApiService {
   constructor(
     private db: AngularFireDatabase,
     private afAuth: AngularFireAuth
-  ) {
+  ) {}
+
+  init() {
     const userId = this.afAuth.auth.currentUser.uid;
     if (userId) {
       this.comprasAF = this.db.list<Compra>(`compras/${userId}`);

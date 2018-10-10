@@ -1,23 +1,18 @@
 import { Component, OnInit } from "@angular/core";
 import { CompraService } from "../compra.service";
 import { Compra } from "../compra";
-import { ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-compras",
   templateUrl: "./compras.component.html",
-  styleUrls: ["./compras.component.css"],
-  providers: [CompraService]
+  styleUrls: ["./compras.component.css"]
 })
 export class ComprasComponent implements OnInit {
-  private compraService: CompraService;
-  private route: ActivatedRoute;
-
   compras: Compra[] = [];
 
-  constructor(compraService: CompraService, route: ActivatedRoute) {
+  constructor(private compraService: CompraService, private router: Router) {
     this.compraService = compraService;
-    this.route = route;
   }
 
   ngOnInit() {
@@ -40,5 +35,10 @@ export class ComprasComponent implements OnInit {
 
   onUpdateCompra(compra: Compra) {
     this.compraService.updateCompra(compra);
+  }
+
+  onSair() {
+    this.compraService.logOut();
+    this.router.navigate(["login"]);
   }
 }

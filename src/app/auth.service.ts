@@ -1,13 +1,12 @@
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
+import { ApiService } from "./api.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
-  public afAuth: AngularFireAuth;
-
-  constructor(afAuth: AngularFireAuth) {
+  constructor(public afAuth: AngularFireAuth, private api: ApiService) {
     this.afAuth = afAuth;
   }
 
@@ -22,6 +21,7 @@ export class AuthService {
 
     try {
       await this.afAuth.auth.signInWithEmailAndPassword(email, password);
+      this.api.init();
     } catch (error) {
       return false;
     }
@@ -50,6 +50,10 @@ export class AuthService {
       return false;
     }
     return true;
+  }
+
+  logOut() {
+    this.afAuth.auth.signOut();
   }
 
   get uid() {

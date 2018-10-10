@@ -29,6 +29,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { SignUpComponent } from "./sign-up/sign-up.component";
 import { CompareValidatorsDirective } from "./compare-validators.directive";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
+import { AuthService } from "./auth.service";
 
 library.add(faTrash, faPen, faCircle, faCheckCircle);
 
@@ -56,7 +57,7 @@ library.add(faTrash, faPen, faCircle, faCheckCircle);
     ReactiveFormsModule,
     FontAwesomeModule
   ],
-  providers: [CompraService, ApiService],
+  providers: [CompraService, ApiService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
