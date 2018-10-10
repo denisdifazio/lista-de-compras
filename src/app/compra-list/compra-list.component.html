@@ -1,4 +1,4 @@
-<section class="main" *ngIf="compras.length > 0">
+<div class="pb-2" *ngIf="compras.length > 0">
   <ul class="list-group">
     <li class="list-group-item" *ngFor="let compra of compras" [class.completed]="compra.completada">
       <app-compra-list-item [compra]="compra" (toggleCompletada)="onToggleTodoCompletada($event)" (remove)="onRemoveCompra($event)"
@@ -6,4 +6,4 @@
       </app-compra-list-item>
     </li>
   </ul>
-</section>
+</div>
