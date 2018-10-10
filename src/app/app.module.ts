@@ -3,6 +3,14 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { environment } from "../environments/environment";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faTrash,
+  faPen,
+  faCheckCircle
+} from "@fortawesome/free-solid-svg-icons";
+import { faCircle } from "@fortawesome/free-regular-svg-icons";
 
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
@@ -21,6 +29,8 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { SignUpComponent } from "./sign-up/sign-up.component";
 import { CompareValidatorsDirective } from "./compare-validators.directive";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
+
+library.add(faTrash, faPen, faCircle, faCheckCircle);
 
 @NgModule({
   declarations: [
@@ -43,7 +53,8 @@ import { AngularFireDatabaseModule } from "@angular/fire/database";
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [CompraService, ApiService],
   bootstrap: [AppComponent]
