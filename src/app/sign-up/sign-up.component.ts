@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthService } from "../auth.service";
+import { AuthService } from "../services/auth.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 
@@ -53,7 +53,6 @@ export class SignUpComponent implements OnInit {
   }
 
   public cancelar() {
-    this.router.navigate(["login"])
-
+    this.router.navigate(["login"]);
   }
 }

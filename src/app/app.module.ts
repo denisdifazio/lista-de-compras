@@ -19,8 +19,8 @@ import { HeaderComponent } from "./header/header.component";
 import { CompraListComponent } from "./compra-list/compra-list.component";
 import { CompraListItemComponent } from "./compra-list/compra-list-item/compra-list-item.component";
 import { FooterComponent } from "./footer/footer.component";
-import { CompraService } from "./compra.service";
-import { ApiService } from "./api.service";
+import { CompraService } from "./services/compra.service";
+import { ApiService } from "./services/api.service";
 import { AppRoutingModule } from "./app-routing.module";
 import { ComprasComponent } from "./compras/compras.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
@@ -29,7 +29,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { SignUpComponent } from "./sign-up/sign-up.component";
 import { CompareValidatorsDirective } from "./compare-validators.directive";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
-import { AuthService } from "./auth.service";
+import { AuthService } from "./services/auth.service";
 
 library.add(faTrash, faPen, faCircle, faCheckCircle);
 

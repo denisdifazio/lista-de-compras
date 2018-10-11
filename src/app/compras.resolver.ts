@@ -6,7 +6,7 @@ import {
 } from "@angular/router";
 import { Compra } from "./compra";
 import { Observable } from "rxjs";
-import { CompraService } from "./compra.service";
+import { CompraService } from "./services/compra.service";
 
 @Injectable()
 export class ComprasResolver implements Resolve<Observable<Compra[]>> {

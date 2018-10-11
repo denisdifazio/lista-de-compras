@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Compra } from "./compra";
+import { Compra } from "../compra";
 import { ApiService } from "./api.service";
 import { Observable } from "rxjs";
 import { AuthService } from "./auth.service";

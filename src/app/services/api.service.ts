@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Compra } from "./compra";
+import { Compra } from "../compra";
 import { Observable } from "rxjs";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFireDatabase, AngularFireList } from "@angular/fire/database";

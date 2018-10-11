@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { CompraService } from "../compra.service";
+import { CompraService } from "../services/compra.service";
 import { Compra } from "../compra";
 import { Router } from "@angular/router";
 
