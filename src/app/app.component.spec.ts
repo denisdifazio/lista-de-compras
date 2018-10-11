@@ -1,12 +1,12 @@
 import { TestBed, async } from "@angular/core/testing";
 import { AppComponent } from "./app.component";
 import { FormsModule } from "@angular/forms";
-import { Compra } from "./compra";
+import { RouterTestingModule } from "@angular/router/testing";
 
 describe("AppComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule],
+      imports: [FormsModule, RouterTestingModule],
       declarations: [AppComponent]
     }).compileComponents();
   }));
@@ -16,10 +16,4 @@ describe("AppComponent", () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   });
-
-  it("deve conter uma variavel do tipo Compra", async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    let app = fixture.debugElement.componentInstance;
-    expect(app.compra instanceof Compra).toBeTruthy();
-  }));
 });
