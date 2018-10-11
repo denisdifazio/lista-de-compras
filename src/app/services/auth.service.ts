@@ -35,6 +35,7 @@ export class AuthService {
 
     try {
       await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+      this.api.init();
     } catch (error) {
       switch (error.code) {
         case "auth/invalid-email":
